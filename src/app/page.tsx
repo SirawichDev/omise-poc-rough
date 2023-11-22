@@ -79,6 +79,7 @@ export default function Home() {
         // -d "amount=3000" \ <-- much be the with amount in create source
         // -d "currency=thb" \
         // -d "source=YOUR_SOURCE_ID" <-- from createSource callback
+        // https://jsonformatter.org/json-pretty-print
       },
       image:
         "https://evme.io/_next/image?url=https%3A%2F%2Fevme-website-cms.s3.ap-southeast-1.amazonaws.com%2Fapp_icon_logo_acb29c739b_01b46329cd.png&w=1920&q=75",
