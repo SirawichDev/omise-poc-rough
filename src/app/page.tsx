@@ -5,10 +5,9 @@ import Script from "next/script";
 export default function Home() {
   const handleScriptLoad = () => {
     window.OmiseCard.configure({
-      publicKey: "pkey_test_5xtyknt8y9f3o130ael",
+      publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY ?? '',
     });
-    window.Omise.setPublicKey("pkey_test_5xtyknt8y9f3o130ael");
-    console.log("wwww", window);
+    window.Omise.setPublicKey(process.env.NEXT_PUBLIC_PUBLIC_KEY ?? '');
 
     // เอาไปใช้ตอน กดจ่ายเงิน (credit card)
     const tokenParameters: OmiseTokenParameters = {
@@ -42,10 +41,10 @@ export default function Home() {
       frameDescription: "asdasdas #3847",
       location: "yes",
       onCreateTokenSuccess: async (nonce) => {
-        console.log(
-          "🚀 ~ file: page.tsx:65 ~ omiseCardHandler ~ nonce:",
-          window
-        );
+        // console.log(
+        //   "🚀 ~ file: page.tsx:65 ~ omiseCardHandler ~ nonce:",
+        //   window
+        // );
         const tokenParameters: OmiseCreateSourceParameters = {
           amount: 2000,
           currency: "THB",
@@ -56,15 +55,13 @@ export default function Home() {
           name: "Somchai Prasert",
           phone_number: "0123456789",
         };
-        let gg;
+        // let gg;
         let data;
         window.Omise.createSource(
           "promptpay",
           tokenParameters,
           function (code, res) {
-            gg = res;
-            console.log("🚀 ~ file: page.tsx:58 ~ res:", res);
-            console.log("🚀 ~ file: page.tsx:58 ~ code:", code);
+            // gg = res;
             data = {
               amount: 2000,
               currency: "thb",
@@ -79,10 +76,12 @@ export default function Home() {
         // -d "amount=3000" \ <-- much be the with amount in create source
         // -d "currency=thb" \
         // -d "source=YOUR_SOURCE_ID" <-- from createSource callback
+
+        // you can make result from the curl  prettier by copy it and paste to this link
         // https://jsonformatter.org/json-pretty-print
       },
       image:
-        "https://evme.io/_next/image?url=https%3A%2F%2Fevme-website-cms.s3.ap-southeast-1.amazonaws.com%2Fapp_icon_logo_acb29c739b_01b46329cd.png&w=1920&q=75",
+        process.env.NEXT_PUBLIC_LOGO_IMAGE,
       locale: "th",
       onFormClosed: () => {
         console.log("ghhh");
